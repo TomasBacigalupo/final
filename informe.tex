@@ -1,4 +1,10 @@
-\documentclass[12pt]{amsart}
+\documentclass{article}
+\usepackage[spanish]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\graphicspath{ {./images/} }
+\usepackage{hyperref}
+\usepackage{subcaption}
 \usepackage{geometry} % see geometry.pdf on how to lay out the page. There's lots.
 \geometry{a4paper} % or letter or a5paper or ... etc
 % \geometry{landscape} % rotated page geometry
@@ -6,15 +12,32 @@
 % See the ``Article customise'' template for come common customisations
 
 
-
-\title{Final Supermercado COVID-19}
+\author{Tomás Bacigalupo , Lucio Pagni}
+\date{\today}
 \author{Tomas Bacigalupo y Lucio Pagni}
 \date{18/07/2020} % delete this line to display the current date
 
 %%% BEGIN DOCUMENT
 \begin{document}
 
-\maketitle
+% caratula
+\begin{titlepage}
+\centering
+{\includegraphics[width=1\textwidth]{./images/logoitba.png}\par}
+\vspace{1cm}
+{\scshape\Large Simulaci\'on de Sistemas \par}
+\vspace{3cm}
+{\scshape\Huge Aut\'omatas Celulares Off-Lattice\par}
+\vspace{3cm}
+{\itshape\Large Trabajo Pr\'actico 2 \par}
+\vfill
+{\Large Autores: \par}
+{\Large Tomas Bacigalupo, Lucio Pagni\par}
+\vfill
+{\Large \today \par}
+\end{titlepage}
+\clearpage
+
 \tableofcontents
 
 \section{Introducción}
