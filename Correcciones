@@ -1,0 +1,60 @@
+IMFORME:
+
+
+- Leer y seguir la guia para redactar informes subida a Material Didactico/Campus.
+
+- Tomar todas las correcciones de la presentacion que se aplican al informe.
+
+- Usar editor de ecuaciones, por ejemplo Latexit.
+
+- Sec. 1
+Las ecuaciones no se numeran de esta forma, sino con un parentesis a la derecha y separado de la ecuacion (no va Ec. 1 a la izquierda). Ver cualquier paper como modelo. Parecen haber usado latex, ver manuales de latex de como etiquetar (label) y referenciar ecuaciones.
+
+Faltan espacios y simbolos en el texto debajo de las ecuaciones.
+
+- La Sec. 3 debe ser la  Sec. 2, "Implementacion"
+- La seccion 5 debe formar parte de la seccion de Resultados (no es otra seccion)
+
+Las estructura de las secciones deben ser:
+
+1- Intro/Fundamentos: descripción de (sistema fisico si lo hubiera) y Modelo general (en este caso);
+2- Implementación (mayor detalle, arquitectura, diagrama UML, etc.),
+3- Simulaciones (especificacion de sistema particular que se estudiara, con sus parametros fijos, y variables, etc.).
+4- Resultados (más extensa, animaciones, con figuras, tablas, etc.)
+5- Conclusiones (una diapositiva).
+En el caso del informe
+- Referencias
+Opcional:
+- Apéndice.
+
+- En la Seccion  de arquitecura y UML se debe intercalar texto que describa las figruas que se muestran. Todas las figuras deben ser referenciadas en el texto como Fig. X. Pero en la leyenda debajo de la figura esta bien escribir "Figura X:..."
+
+- IMPORTANTISIMO: hay que definir los outputs que se miden. NO pued faltar en este caso, la definicion de la Polarización".
+
+De nuevo, como en la presentacion, no va un resumen de solo texto y luego las figuras en otra seccion. Toda va en la misma seccion de resultados con el texto intercalado entre las figuras explicando lo que se va a mostrar en que condiciones y luego describiendo lo que se observa en la figura.
+
+
+- IMPORTANTE: de nuevo como en la presentacion, Hay que especificar las condiciones 7 parametros bajo los cuales se obtienen los resultados mostrados.
+
+- Las leyendas de las figuras son incorrectas. Por ejemplo:
+"Figura 7: gráfico de la velocidad absoluta promedio respecto del ruido" deberia ser
+
+
+"Figura 7: Polarizacón en funcion del ruido para N=30,60 y 90 y L=?"
+
+- Tambien en el informe hacen falta tamaños de letra y numero mayores, por ejemplo 18 o que se vean igual de grandes que el resto del texto.
+ Las figuras no llevan títulos y similares recomendaciones que para la presentacion respecto del nombre de los ejes y demas...
+
+
+- "Gráficos de salida del programa graphics.py" no dice nada relevante sobre los resultados. No es un resultado qué soft se utilizó para procesarlos. Esa informacion ya se dio en la Sec. de Implementación.
+
+
+
+- Las Animaciones no son una seccion aparte. Son parte de los resultados y lo mejor es ver una que ilustre cada situacion a estudiar antes de mostrar los resultados numericos para tener una idea intuituva de como fuciona la simulacion.
+
+
+- Conclusiones
+
+Separar cada conclusion con un punto y aparte.
+
+Valen las mismas observaciones que para las conclusiones en la presentación. y el comentario sobre que una de las figuras que deberia parecerse a la del paper no lo hace (no esta en el rango de valores de la porlarizacion, ni de los parametros utilizados)
