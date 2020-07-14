@@ -1,3 +1,49 @@
+- El formato de los archivos entregados originalmente no era el solicitado.
+
+- Presentacion, carente de la estructura adecuada y de especificaciones para entender de donde salen y como se obtuvieron los resultados presentados.
+
+- Presentacion e informe, hay que considerar que ambos documentos deben ser autocontenidos y son independientes.
+
+- IMPORTANTISIMO :Es una falla grave que el MODELO no esté explicitamente indicado en la presentacion. Ecuaciones bien escritas con editor y todas las especificaciones necesarias (como en la teorica).
+
+- Lo mismo con implementacion.
+
+- IMPORTANTISIMO: Hayq ue definir adecuadamente los outputs que se van a medir, en este caso "Polarizacion".
+
+- Las Daipositivas deben estar numeradas. Repetar el formato de las presentaciones indicados en la Teórica 1.
+
+- Separar las secciones con un seperador que solamente indique el nombre de la seccion.
+
+- Diapo 14 , Los resultados se deben mostrar con datos y despues hacer un resumen en las conclusiones. Esto no se hace en el inicio de la seccion Resultados.
+
+- Tanto al mostar animaciones o cualquier otro resultado, se debe explicitar los parametros / condiciones con las que se obtuvieron esos resultados.
+
+- En este caso habia que incluir los links de las animaciones a youtube o similar por no haber presentacion presencial.
+
+- Hay que estructurar mucho mejor la seccion de resultados. "Graficos y Tablas" no es un título adecuado.
+Se debe mostrar para las distitnas condiciones a estudiar una animacion y las figuras correspondientes. Si se va a estudiar la evolucion temporal como en este caso. Entonces primero se muestra eso y se indica desde donde se considera estacionario, como se promedian esos valores, que luego se mostraran en figuras de input vs output, con barra de error. Siempre epecificando que parametros se usaron, dada la descripcion del modelo que se esta simulando. En este caso, N, L y ruido. Ademas de especificar la duracion de las simulaciones, cuantas veces se repitieron, etc.
+
+-  Los nombres de los ejes en las figuras deben ser palabras no solo símbolos.
+, Para los números usar notacion científica. Por eje en la diapo 21, "N a L=5", es incorrecto. Deberia ser, "Numero de Partículas" y el valor de L y del Ruido especificado al costado de la figura, Para eso mejor poner una figura por diapositiva. Con tamaño de letras y numeros mucho mas grande que las presentadas, por ejmplo fontsize 30.
+
+Las Figuras no llevan títulos. Esa informacion debe ir en la diapositiva, fuera de la figura, en forma de titulo o subitulo o texto de la diapositiva.
+
+- Diapo 21, Habria que indicar que parte de las curvas de la izquierda se usaron para obtener los promedios de la derecha. De cualquier modo. Estos resultados no corresponden a los rangos de parametros del paper de Vicsek, como se indicó en la consigna, ni la figura de la derecha, es similar a ninguna de las figuras de dicho paper.
+
+
+- Conclusiones:
+Las conclusiones solo deben apoyarse en los resultados mostrados, no en cosas observadas durante la realizacion del tp pero no presentadas.
+
+En particular:
+"A medida que se reduce el ruido en partículas de varios tamaños y con una densidad fija, se observa una transición de una fase con un con partículas moviéndose desordenadamente a una fase en la cual se observa que las partículas realizan un movimiento coherente."
+
+- "A medida que se reduce el ruido" ?? La palabra ruido no está en la presentacion...
+- "partículas de varios tamaños"?? Las particulas en este modelo son puntuales...
+- "coherente"? cuando se definió la coherencia? Se refieren a "Polarización"?
+
+"Un caso interesante es cuando la densidad es grande y el ruido es pequeño, en este caso el movimiento se ordena macroscópicamente y las partículas tienden a moverse espontáneamente en la misma dirección seleccionada." ¿"seleccionada"? por quien?
+
+
 IMFORME:
 
 
