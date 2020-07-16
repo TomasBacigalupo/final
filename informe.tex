@@ -70,9 +70,11 @@ El simulador debe ser altamente configurable, para esto se implementó una clase
 
 \subsubsection{Programación contra interfaces}
 
-Como se mencionó anteriormente, es importante poder programar contra interfaces. No solo es muy importante que cada módulo honre correctamente sus interfaces, sino que estas esten bien diseñadas de manera que se abarque el problema de manera completa. Además, se debe tener cuidado de no exponer estado interno de una clase de manera innecesaria.
+\paragraph{}
+Como se mencionó anteriormente, es importante poder programar contra interfaces. No solo es muy importante que cada módulo honre correctamente sus interfaces, sino que estas estén bien diseñadas de manera que se abarque el problema de manera completa. Además, se debe tener cuidado de no exponer estado interno de una clase de manera innecesaria. Veremos la justificación de diseño de la interfaz Caja
 
-
+\paragraph{}
+Se expone estado interno de la caja innecesariamente? Por un lado, es verdad que lo mejor sería llamar a cajas.add(agent), o un método del estilo. Sin embargo esto no cubre la complejidad del problema a resolver, esto es porque se deben hacer varias consultas al estado interno de caja antes de insertar definitivamente un agente en la fila. La interfaz de la fila no solo debe darle varios datos a la máquina de estado sino que también debe otorgarlos en instantes distintos del tiempo. Es por eso que la fila provee información que indica a que caja ir y a que posición de cada caja debe ir. Este diseño le permite a la máquina de estados preguntar tantas veces como sea necesario. Además si retornamos unicamente una posición y no el indice de la caja, no estaríamos teniendo en cuanta si su lugar fue ocupado antes por otro agente. En definitiva, los datos expuestos son para que la máquina de estados tenga mas granularidad a la hora de elegir a donde ir y como llegar.
 
 \section{Simulaciones}
 Las simulaciones podemos dividirlas en tres grandes grupos. Por un lado se tienen las simulaciones iniciales, en las cuales el módulo caja es solo un boceto. En estas simulaciones se plantea el esquema básico del problema a resolver por el módulo de caja.
