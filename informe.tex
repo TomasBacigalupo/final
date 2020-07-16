@@ -47,11 +47,30 @@
 \clearpage
 
 \section{Introducción}
-Se trabajo durante la segunda mitad del cuatrimestre en un software de simulación de personas comprando en un supermercado. Nuestro trabajo en el desarrollo fue el de estructurar el proyecto y desarrollar el modulo de la caja que consta de atender clientes y encolarlos en la fila correcta. Por otro lado el trabajo de estructura nos llevo a tomar decisiones como desarrollos de pom.xml con sus respectivas dependencias en cada modulo y como tarea principal se implementaron todos los módulos a travez de un main que permitía mediante un archivo de configuración establecer las variables de la simulación. Y es en este momento donde comienza nuestro trabajo de desarrollo para esta entrega final, donde se mejoraron los tiempos de simulación mediante la mejora de nuestros dos módulos: Main y Caja
+Con el objetivo de estudiar el problema de distanciamiento social en el contexto de la pandemia mundial del covid-19 se trabajo durante la segunda mitad del cuatrimestre en un software de simulación de peatones comprando en un supermercado.Dicho software busca ser más poderoso y configurable que otras versiones comerciales, las cuales usamos como referencia. Nuestro trabajo en el desarrollo fue el de estructurar el proyecto, implementar el main (del cual se desencadenan las llamadas a todos los demás módulos),  y desarrollar el modulo de la caja, cuya tarea es la  de atender clientes y encolarlos en la fila correcta. Por otro lado el trabajo de estructura nos llevo a tomar decisiones como desarrollos de pom.xml con sus respectivas dependencias en cada modulo y como tarea principal se implementaron todos los módulos a travez de un main que permitía mediante un archivo de configuración establecer las variables de la simulación. Y es en este momento donde comienza nuestro trabajo de desarrollo para esta entrega final, donde se mejoraron los tiempos de simulación mediante la mejora de nuestros dos módulos: Main y Caja
 
 \section{Implementación}
-En cuanto a la estructura, se optó por una implementación simple de Interfaces e Implementaciones, con el objetivo de programar contra interfaces como se puede ver en la figura \ref{grafico}. Incialmente la estructura propuesta consistía en una serie de módulos,
-interconectados entre sí mediante una estructura jerárquica. Esta idea inicial no se llevó a cabo por problemas de dependencias cíclicas en esta estructura jerárquica. La estructura de la implementación es conveniente a la hora de definir los testeos unitarios de los métodos implementados y también lo es a la hora de definir archivos de configuración. En el momento de diagramar el main de la simulación, se hizo un uso intensivo de esta estructura y sus convenciones. Otra ventaja es que nos permite cumplir con los requerimientos impuestos con la cátedra de generar un archivo ejecutable .jar. Una de las bondades de la arquitectura de la implementación es que nos permite obtener dicho ejecutable realizando 'mvn clean package' en la terminal.
+
+\paragraph{}
+En esta sección discutiremos todos los aspectos que hacen a la implementación del simulador y la justificación de las decisiones tomadas, tanto de diseño de clases como de diseño de arquitectura.
+
+\subsubsection{La estructura general del proyecto}
+
+En cuanto a la estructura, se optó por una implementación simple de Interfaces e Implementaciones, con el objetivo de programar contra interfaces como se puede ver en la figura \ref{grafico}. 
+
+\paragraph{}
+Incialmente la estructura propuesta consistía en una serie de módulos,interconectados y dependientes entre sí mediante una estructura jerárquica. Esta idea inicial no se llevó a cabo por problemas de dependencias cíclicas en esta estructura jerárquica. La estructura de la implementación es conveniente a la hora de definir los testeos unitarios de los métodos implementados y también lo es a la hora de definir archivos de configuración. 
+
+\paragraph{}
+En el momento de diagramar el main de la simulación, se hizo un uso intensivo de esta estructura y sus convenciones. Otra ventaja es que nos permite cumplir con los requerimientos impuestos con la cátedra de generar un archivo ejecutable .jar. Una de las bondades de la arquitectura de la implementación es que nos permite obtener dicho ejecutable realizando 'mvn clean package' en la terminal.
+
+\subsubsection{El problema de la configuración}
+
+El simulador debe ser altamente configurable, para esto se implementó una clase aparte llamada ReadConf.java la cual tiene la responsabilidad de leer el archivo de configuración config.properties y servir dichos valores mediante sus variables, las cuales son accesibles desde cualquier clase del proyecto.
+
+\subsubsection{Programación contra interfaces}
+
+Como se mencionó anteriormente, es importante poder programar contra interfaces. No solo es muy importante que cada módulo honre correctamente sus interfaces, sino que estas esten bien diseñadas de manera que se abarque el problema de manera completa. Además, se debe tener cuidado de no exponer estado interno de una clase de manera innecesaria.
 
 
 
