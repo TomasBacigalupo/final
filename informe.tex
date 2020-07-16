@@ -50,18 +50,23 @@
 Se trabajo durante la segunda mitad del cuatrimestre en un software de simulación de personas comprando en un supermercado. Nuestro trabajo en el desarrollo fue el de estructurar el proyecto y desarrollar el modulo de la caja que consta de atender clientes y encolarlos en la fila correcta. Por otro lado el trabajo de estructura nos llevo a tomar decisiones como desarrollos de pom.xml con sus respectivas dependencias en cada modulo y como tarea principal se implementaron todos los módulos a travez de un main que permitía mediante un archivo de configuración establecer las variables de la simulación. Y es en este momento donde comienza nuestro trabajo de desarrollo para esta entrega final, donde se mejoraron los tiempos de simulación mediante la mejora de nuestros dos módulos: Main y Caja
 
 \section{Implementación}
-En cuanto a la estructura, luego de varias idas y vueltas de los distintos grupos de trabajo se opto por una implementación simple de Interfaces e Implementaciones, con el objetivo de programar contra interfaces como se puede ver en la figura \ref{grafico}
+En cuanto a la estructura, se optó por una implementación simple de Interfaces e Implementaciones, con el objetivo de programar contra interfaces como se puede ver en la figura \ref{grafico}. Incialmente la estructura propuesta consistía en una serie de módulos,
+interconectados entre sí mediante una estructura jerárquica. Esta idea inicial no se llevó a cabo por problemas de dependencias cíclicas en esta estructura jerárquica. La estructura de la implementación es conveniente a la hora de definir los testeos unitarios de los métodos implementados y también lo es a la hora de definir archivos de configuración. En el momento de diagramar el main de la simulación, se hizo un uso intensivo de esta estructura y sus convenciones. Otra ventaja es que nos permite cumplir con los requerimientos impuestos con la cátedra de generar un archivo ejecutable .jar. Una de las bondades de la arquitectura de la implementación es que nos permite obtener dicho ejecutable realizando 'mvn clean package' en la terminal.
 
 
 
 \section{Simulaciones}
-texto
+Las simulaciones podemos dividirlas en tres grandes grupos. Por un lado se tienen las simulaciones iniciales, en las cuales el módulo caja es solo un boceto. En estas simulaciones se plantea el esquema básico del problema a resolver por el módulo de caja.
+Luego se tienen las simulaciones intermedias, estas son, todas las simulaciones que se llevaron a cabo con el simulador integrado. De estas últimas las más importantes son las entregadas para el TP6. Por último se tienen las simulaciones realizadas para evaluar
+la mejora en el tiempo de ejecución.
 
 \section{Resultados}
-texto
+Los resultados discutidos en esta sección hacen referencia a las simulaciones realizadas para evaluar la mejora en el tiempo de ejecución.
+Los resultados de las simulaciones antes de las mejoras se pueden ver en la tabla \ref{tablaAntes}.
+Los resultados de las simulaciones despue\'es de las mejoras se pueden ver en la tabla \ref{tablaDespues}.
 
 \section{Concluciones}
-texto
+Observando los resultados podemos concluir que las mejoras realizadas en el código lograron el objetivo de disminuir el tiempo de ejecución.
 
 \section{Apéndice}
 texto
