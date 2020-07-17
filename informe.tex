@@ -85,10 +85,10 @@ El main debe guardar el estado del sistema, esto se hace cada cierto dt2, el cua
 El módulo de fila se descompone en N cajas las cuales tienen 2 cajeros cada una. Tiene una capacidad máxima max, una distancia social d y una distancia H a un punto pi el cual parametriza la posición de las cajas.
 
 \paragraph{}
-La parametrización geométrica se hizo lo mas general posible para poder adaptarnos a la hora de llamar al módulo de geometría y poder usar el retorno para asignar los parámetros de nuestra implementación.
+La parametrización geométrica se hizo lo mas general posible para poder adaptarnos a la hora de llamar al módulo de geometría y poder usar el retorno para asignar los parámetros de nuestra implementación. En la imágen \ref{supermercado} podemos ver un plano que muestra estos parámetros. El módulo geometría expone su API en la interfaz \ref{interfaceGeomety}
 
 \paragraph{}
-El módulo provee una API pensada para la máquina de estados.
+El módulo provee una API pensada para la máquina de estados. Esto puede verse en \ref{interfaceCaja}
 
 \subsubsection{Input}
 
@@ -158,7 +158,7 @@ El simulador debe ser altamente configurable, para esto se implementó una clase
 Como se mencionó anteriormente, es importante poder programar contra interfaces. No solo es muy importante que cada módulo honre correctamente sus interfaces, sino que estas estén bien diseñadas de manera que se abarque el problema de manera completa. Además, se debe tener cuidado de no exponer estado interno de una clase de manera innecesaria. Veremos la justificación de diseño de la interfaz Caja.
 
 \paragraph{}
-Vale la pena entonces preguntarse si la caja expone estado interno innecesariamente. Por un lado, es verdad que lo mejor sería llamar a cajas.add(agent), o un método similar. Sin embargo esto no cubre la complejidad del problema a resolver, esto es porque se deben hacer varias consultas al estado interno de caja antes de insertar definitivamente un agente en la fila. La interfaz de la fila no solo debe darle varios datos a la máquina de estado sino que también debe otorgarlos en instantes distintos del tiempo. Es por eso que la fila provee información que indica a qué caja ir y a qué posición de cada caja debe ir. Este diseño le permite a la máquina de estados preguntar tantas veces como sea necesario. Además si retornamos únicamente una posición y no el indice de la caja, no estaríamos teniendo en cuanta si su lugar fue ocupado antes por otro agente. En definitiva, los datos expuestos son para que la máquina de estados tenga más granularidad a la hora de elegir a donde ir y como llegar.
+Vale la pena entonces preguntarse al mirar la interfaz \ref{cajaImpl} si la caja expone estado interno innecesariamente. Por un lado, es verdad que lo mejor sería llamar a cajas.add(agent), o un método similar. Sin embargo esto no cubre la complejidad del problema a resolver, esto es porque se deben hacer varias consultas al estado interno de caja antes de insertar definitivamente un agente en la fila. La interfaz de la fila no solo debe darle varios datos a la máquina de estado sino que también debe otorgarlos en instantes distintos del tiempo. Es por eso que la fila provee información que indica a qué caja ir y a qué posición de cada caja debe ir. Este diseño le permite a la máquina de estados preguntar tantas veces como sea necesario. Además si retornamos únicamente una posición y no el indice de la caja, no estaríamos teniendo en cuanta si su lugar fue ocupado antes por otro agente. En definitiva, los datos expuestos son para que la máquina de estados tenga más granularidad a la hora de elegir a donde ir y como llegar.
 
 \section{Simulaciones}
 
@@ -264,14 +264,6 @@ texto
 \includegraphics[width=4in]{./images/interfaceGeometry.PNG}
 \caption{UML interface de Geometry }
 \label{interfaceGeomety}
-\end{center}
-\end{figure}
-
-\begin{figure}[h]
-\begin{center}
-\includegraphics[width=4in]{./images/claseCajero.PNG}
-\caption{UML implementación de Cajero }
-\label{claseCajero}
 \end{center}
 \end{figure}
 
