@@ -125,7 +125,7 @@ En el momento de diagramar el main de la simulación, se hizo un uso intensivo d
 \subsection{La implementación del tiempo en el Main}
 
 \paragraph{}
-Dentro de las responsabilidades del main también encontramos la responsabilidad de generar archivos cada cierto dt2. El tiempo en el main se acumula en la variable time y se incrementa el dt en cada iteración. El módulo caja opera según este tiempo, en cada llamada se incrementa el tiempo para la caja también.
+Dentro de las responsabilidades del main también encontramos la responsabilidad de generar archivos cada cierto dt2. El tiempo en el main se acumula en la variable time y se incrementa el dt en cada iteración. El módulo caja opera según este tiempo, en cada llamada se incrementa el tiempo para la caja también. Dentro de las responsabilidades del main también encontramos la responsabilidad de generar archivos cada cierto dt2. El tiempo en el main se acumula en la variable time y se incrementa el dt en cada iteración. El módulo caja opera según este tiempo, en cada llamada se incrementa el tiempo para la caja también. En la tabla podemos ver los archivos generados por el main si se tiene un dt de 0.1 segundos y se simula un segundo. En el caso que dt sea mucho  menor que el dt2, por ejemplo si dt = 0.00001 y dt2 = 0.5 entonces el único archivo de salida será 5.txt.
 
 \subsection{Problemas surgidos durante la integración}
 
@@ -288,6 +288,34 @@ texto
 \hline
 \end{tabularx}
 \caption{Descripcion de la tabla}
+\label{referencia:5}
+\end{center}
+\end{table}
+
+\begin{table}[h]
+\begin{center}
+\begin{tabularx}{0.8\textwidth} { 
+  | >{\raggedright\arraybackslash}X 
+  | >{\centering\arraybackslash}X 
+  | >{\raggedleft\arraybackslash}X | }
+ \hline
+dt2 & archivos generados \\
+ \hline
+ 0.01 | 0.001 | 0.0001 & 1.txt	2.txt	3.txt	4.txt	5.txt 6.txt	7.txt	8.txt	9.txt \\
+\hline
+0.1 & 2.txt	3.txt	4.txt	5.txt	6.txt	7.txt	8.txt	9.txt \\
+\hline
+0.2 & 3.txt	5.txt	6.txt	8.txt  \\
+\hline
+0.3 & 3.txt	6.txt	9.txt  \\
+\hline
+0.4  & 5.txt	8.txt  \\
+\hline
+0.5 & 5.txt \\
+\hline
+\hline
+\end{tabularx}
+\caption{Implementación del Tiempo en el Main}
 \label{referencia:5}
 \end{center}
 \end{table}
