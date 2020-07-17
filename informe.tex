@@ -119,6 +119,20 @@ Dentro de las responsabilidades del main también encontramos la responsabilidad
 \paragraph{}
 En un primer momento se resolvió el problema de la caja de manera aislada. Cuando se llevo a cabo la integración surgieron algunos inconvenientes los cuales pasamos a mencionar.
 
+\paragraph{}
+En un primer momento, se planteó el problema de las cajas como el problema de los productores y los consumidores. Esto implica que existe un while, bloqueante, que evita que el programa prosiga su ejecución mientras los demás agentes esta siendo atendidos. Esto sería equivalente a que cuando estamos en el supermercado y alguien esta pagando, tendríamos que quedarnos congelados hasta que se termina de atender. Este problema surge básicamente porque se pasa de un simulador aislado a un simulador integrado.
+
+\paragraph{}
+Debido a que el problema venía dado porque el método .run() de Caja Impl era estático (y porque para quien tiene un martillo todo problema es un clavo) optamos por hacer que el código bloqueante este en un thread aparte. Sin embargo cada thread estaba haciendo busy waiting y generando una cadena de texto que almacenaba valores. Esto consumía muchísimos recursos del computador (CPU y RAM).
+
+\paragraph{}
+Para compensar el busy waiting utilizamos sleep. Esto podemos pensarlo como cuando un niño en la ruta le pregunta al padre cada 2 minutos cuanto falta para llegar al destino. La función sleep es el equivalente a que el niño se duerma y se despierte justo cuando se llega al destino.
+
+\paragraph{}
+Una vez hecho esto el consumo de recursos bajo drásticamente pero aún había un problema, los sleep requieren un tiempo en segundos como parámetro. Estó nos reveló una falla conceptual clave que teniamos respecto del tiempo de la simulación, el cual venía heredado del simulador aislado en el cual no teniamos una abstracción del tiempo de simulación aún.
+
+\paragraph{}
+Finalmente, pensando el problema otra vez, nos dimos cuenta que la solución era mucho mas sencilla que todo lo que habíamos hecho. Se usó el while del main para preguntar en cada iteración el estado de las cajas. Además se usó el dt de main como cronómetro y no el tiempo del sistema. La lógica original se mantuvo intacta. Con estos cambios el método .run() solo debe hacer comparaciones, ya que el while del run pasa a ser el while del main. De esta manera se elimina el problema del busy waiting.
 
 \subsection{El problema de la configuración}
 
@@ -143,7 +157,19 @@ Luego se tienen las simulaciones intermedias, estas son, todas las simulaciones 
 \paragraph{}
 Las simulaciones que se efectuaron con el simulador de cajas aislados se corrieron con 8 cajas, una separación entre ellas de 20 mts, una capacidad máxima de 8 personas, una distancia H de 8 y una distancia social de 2 mts.
 
+\subsection{Simulaciones con el simulador integrado}
 
+\paragraph{}
+Una vez integrado el simulador en su totalidad, se corrieron simulaciones para poder llevar a cabo el estudio y análisis del problema de la distancia social dentro de un supermercado.
+
+\subsection{Mejoras en el código}
+
+\paragraph{}
+De caras a la búsqueda de una mejora en el código, se buscó la dismunución en el tiempo de ejecución. Una manera de aproximarse a esta tarea es buscando en el código fuente del proyecto operaciones complejas, que requieren de muchos recursos de
+computación y que además son redundantes. Es decir, que no aportan valor al código escrito y que se pueden eliminar del código.
+
+\paragraph{}
+La primer mejora implementada elimina código que no aporta valor y que recorre todas las cajas de manera innecesaria. Esto implica que nos ahorramos comparaciones por cada dt2 del programa. En simulaciones largas con un dt2 cercano a dt esto implicaría realizar operaciones innecesarias que incrementan el tiempo de computo. Esta lógica estaba en el código para calcular la cantidad de agentes atendidos por las cajas, luego de volver a pensar la lógica de actualización se la cambió por una mucho mas sencilla, la cual además hace que esto funcione correctamente. La lógica del calculo de los atendidos fue algo que dejó de funcionar correctamente con la integración.
 
 \section{Resultados}
 \paragraph{}
@@ -151,7 +177,7 @@ Los resultados discutidos en esta sección hacen referencia a las simulaciones r
 Los resultados de las simulaciones antes de las mejoras se pueden ver en la tabla \ref{tablaAntes}.
 Los resultados de las simulaciones despue\'es de las mejoras se pueden ver en la tabla \ref{tablaDespues}.
 
-\section{Concluciones}
+\section{Conclusiones}
 \paragraph{}
 Observando los resultados podemos concluir que las mejoras realizadas en el código lograron el objetivo de disminuir el tiempo de ejecución. Atrevemos esta conclusión ya que si observamos el promedio de todas las corridas hechas antes de las mejoras y las
 comparamos contra los promedios de las corridas después de hechas las mismas observamos que para todo N el promedio de los tiempos de ejecución observamos que estos disminuyen una ve que se hicieron las mejoras.
@@ -201,6 +227,59 @@ texto
 \label{referencia:5}
 \end{center}
 \end{table}
+
+\begin{table}[h]
+\begin{center}
+\begin{tabularx}{0.8\textwidth} { 
+  | >{\raggedright\arraybackslash}X 
+  | >{\centering\arraybackslash}X 
+  | >{\raggedleft\arraybackslash}X | }
+ \hline
+ Parámetro & Valor \\
+ \hline
+ N  & 8 \\
+\hline
+ Delta  & 20 \\
+\hline
+ max & 8  \\
+\hline
+H & 5  \\
+\hline
+d  & 2  \\
+\hline
+p0x  & 0  \\
+\hline
+p0y  & 0  \\
+\hline
+\end{tabularx}
+\caption{Parametros del módulo geometria aislado}
+\label{referencia:5}
+\end{center}
+\end{table}
+
+\begin{table}[h]
+\begin{center}
+\begin{tabularx}{0.8\textwidth} { 
+  | >{\raggedright\arraybackslash}X 
+  | >{\centering\arraybackslash}X 
+  | >{\raggedleft\arraybackslash}X | }
+ \hline
+Parámetro & Valor \\
+ \hline
+MOM & CPM \\
+\hline
+dt  & 0.05 \\
+\hline
+dt2 & 1  \\
+\hline
+total & 1200  \\
+\hline
+\end{tabularx}
+\caption{Parámetros del simulador integrado}
+\label{referencia:5}
+\end{center}
+\end{table}
+
 \clearpage
 
 
