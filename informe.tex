@@ -1,5 +1,7 @@
 \documentclass{article}
 \usepackage[spanish]{babel}
+\usepackage{array}
+\usepackage{tabularx}
 \usepackage[utf8]{inputenc}
 \usepackage{graphicx}
 \graphicspath{ {./images/} }
@@ -173,5 +175,33 @@ texto
 \end{center}
 \end{figure}
 \clearpage
+
+\section{Tablas}
+\begin{table}[h]
+\begin{center}
+\begin{tabularx}{0.8\textwidth} { 
+  | >{\raggedright\arraybackslash}X 
+  | >{\centering\arraybackslash}X 
+  | >{\raggedleft\arraybackslash}X | }
+ \hline
+ Estado & Numero \\
+ \hline
+ Going  & 1 \\
+\hline
+ Aproximating  & 2 \\
+\hline
+ Buying & 3  \\
+\hline
+ Living  & 4  \\
+\hline
+ Queueing  & 5  \\
+\hline
+\end{tabularx}
+\caption{Descripcion de la tabla}
+\label{referencia:5}
+\end{center}
+\end{table}
+\clearpage
+
 
 \end{document}
