@@ -13,7 +13,7 @@
 
 % See the ``Article customise'' template for come common customisations
 
-
+ 
 \author{Tomás Bacigalupo , Lucio Pagni}
 \date{\today}
 \author{Tomás Bacigalupo y Lucio Pagni}
@@ -126,7 +126,6 @@ En el momento de diagramar el main de la simulación, se hizo un uso intensivo d
 
 \paragraph{}
 Dentro de las responsabilidades del main también encontramos la responsabilidad de generar archivos cada cierto dt2. El tiempo en el main se acumula en la variable time y se incrementa el dt en cada iteración. El módulo caja opera según este tiempo, en cada llamada se incrementa el tiempo para la caja también.
-En la tabla podemos ver los archivos generados por el main si se tiene un dt de 0.1 segundos y se simula un segundo. En el caso que dt << dt2, por ejemplo si dt = 0.00001 y dt2 = 0.5 entonces el único archivo de salida será 5.txt.
 
 \subsection{Problemas surgidos durante la integración}
 
@@ -137,7 +136,7 @@ En un primer momento se resolvió el problema de la caja de manera aislada. Cuan
 En un primer momento, se planteó el problema de las cajas como el problema de los productores y los consumidores. Esto implica que existe un while, bloqueante, que evita que el programa prosiga su ejecución mientras los demás agentes esta siendo atendidos. Esto sería equivalente a que cuando estamos en el supermercado y alguien esta pagando, tendríamos que quedarnos congelados hasta que se termina de atender. Este problema surge básicamente porque se pasa de un simulador aislado a un simulador integrado.
 
 \paragraph{}
-Debido a que el problema venía dado porque el método .run() de CajaImpl era estático (y porque para quien tiene un martillo todo problema es un clavo) optamos por hacer que el código bloqueante esté en un thread aparte. Sin embargo cada thread estaba haciendo busy waiting y generando una cadena de texto que almacenaba valores. Esto consumía muchísimos recursos del computador (CPU y RAM).
+Debido a que el problema venía dado porque el método .run() de Caja Impl era estático (y porque para quien tiene un martillo todo problema es un clavo) optamos por hacer que el código bloqueante esté en un thread aparte. Sin embargo cada thread estaba haciendo busy waiting y generando una cadena de texto que almacenaba valores. Esto consumía muchísimos recursos del computador (CPU y RAM).
 
 \paragraph{}
 Para compensar el busy waiting utilizamos sleep. Esto podemos pensarlo como cuando un niño en la ruta le pregunta al padre cada 2 minutos cuanto falta para llegar al destino. La función sleep es el equivalente a que el niño se duerma y se despierte justo cuando se llega al destino.
@@ -268,7 +267,6 @@ texto
 \clearpage
 
 \section{Tablas}
-
 \begin{table}[h]
 \begin{center}
 \begin{tabularx}{0.8\textwidth} { 
@@ -301,48 +299,24 @@ texto
   | >{\centering\arraybackslash}X 
   | >{\raggedleft\arraybackslash}X | }
  \hline
- Estado & Numero \\
+ Parámetro & Valor \\
  \hline
- Going  & 1 \\
+ N  & 8 \\
 \hline
- Aproximating  & 2 \\
+ Delta  & 20 \\
 \hline
- Buying & 3  \\
+ max & 8  \\
 \hline
- Living  & 4  \\
+H & 5  \\
 \hline
- Queueing  & 5  \\
+d  & 2  \\
+\hline
+p0x  & 0  \\
+\hline
+p0y  & 0  \\
 \hline
 \end{tabularx}
-\caption{Descripcion de la tabla}
-\label{referencia:5}
-\end{center}
-\end{table}
-
-\begin{table}[h]
-\begin{center}
-\begin{tabularx}{0.8\textwidth} { 
-  | >{\raggedright\arraybackslash}X 
-  | >{\centering\arraybackslash}X 
-  | >{\raggedleft\arraybackslash}X | }
- \hline
-dt2 & archivos generados \\
- \hline
- 0.01 | 0.001 | 0.0001 & 1.txt	2.txt	3.txt	4.txt	5.txt 6.txt	7.txt	8.txt	9.txt \\
-\hline
-0.1 & 2.txt	3.txt	4.txt	5.txt	6.txt	7.txt	8.txt	9.txt \\
-\hline
-0.2 & 3.txt	5.txt	6.txt	8.txt  \\
-\hline
-0.3 & 3.txt	6.txt	9.txt  \\
-\hline
-0.4  & 5.txt	8.txt  \\
-\hline
-0.5 & 5.txt \\
-\hline
-\hline
-\end{tabularx}
-\caption{Implementación del Tiempo en el Main}
+\caption{Parametros del módulo geometria aislado}
 \label{referencia:5}
 \end{center}
 \end{table}
