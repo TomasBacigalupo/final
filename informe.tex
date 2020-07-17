@@ -171,6 +171,10 @@ computación y que además son redundantes. Es decir, que no aportan valor al c�
 \paragraph{}
 La primer mejora implementada elimina código que no aporta valor y que recorre todas las cajas de manera innecesaria. Esto implica que nos ahorramos comparaciones por cada dt2 del programa. En simulaciones largas con un dt2 cercano a dt esto implicaría realizar operaciones innecesarias que incrementan el tiempo de computo. Esta lógica estaba en el código para calcular la cantidad de agentes atendidos por las cajas, luego de volver a pensar la lógica de actualización se la cambió por una mucho mas sencilla, la cual además hace que esto funcione correctamente. La lógica del calculo de los atendidos fue algo que dejó de funcionar correctamente con la integración.
 
+\paragraph{}
+Tomando como referencia el commit con hash 8f372f51ab574babcb412e27433054dba8a93cc3 del repositorio provisto por la cátedra, se midieron los tiempos de ejecución del programa variando la cantidad de agentes. Luego de una segunda serie de mejoras,
+se tomaron otras mediciones, dicha mejora esta en el commit con hash 6cc59e05024e9c3c4376ce6589377723940f1001 del repositorio provisto por la cátedra. Estas mejoras consistieron en la eliminación de la creación y recorrido de estructuras innecesarias, lo cual disminuyó el tiempo de ejecución.
+
 \section{Resultados}
 \paragraph{}
 Los resultados discutidos en esta sección hacen referencia a las simulaciones realizadas para evaluar la mejora en el tiempo de ejecución.
