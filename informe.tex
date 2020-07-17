@@ -76,7 +76,7 @@ Los inputs del main provienen de la lectura de un archivo de configuración en l
 \subsubsection{Output}
 
 \paragraph{}
-El main debe guardar el estado del sistema, esto se hace cada cierto dt2, el cual es independiente del dt de simulación. Estos son archivos en los cuales se persisten información relevante de los agentes según el dt2. La información persistida en memoria mediante archivos contiene información como el id del agente, sus variables de estado (posición , velocidad) y el estado en el cual se encuentra. Esto permite un posterior procesamiento de los datos.
+El main debe guardar el estado del sistema, esto se hace cada cierto dt2, el cual es independiente del dt de simulación. Estos son archivos en los cuales se persisten información relevante de los agentes según el dt2. La información persistida en memoria mediante archivos contiene información como el id del agente, sus variables de estado (posición , velocidad) y el estado en el cual se encuentra. Esto permite un posterior procesamiento de los datos. Si bien representamos los estados con un String internamente en el simulador, en el output para procesamiento no es deseable tener un string ya que el tamaño de la salida sería muy grande innecesariamente. Es por esto que también las variables de estado se imprimieron con dos decimales. El mapeo de los estados String a número puede verse en la tabla \ref {Representación numérica de los estados en los archivos de salida}.
 
 
 \subsection{Módulo Fila}
@@ -125,7 +125,7 @@ En el momento de diagramar el main de la simulación, se hizo un uso intensivo d
 \subsection{La implementación del tiempo en el Main}
 
 \paragraph{}
-Dentro de las responsabilidades del main también encontramos la responsabilidad de generar archivos cada cierto dt2. El tiempo en el main se acumula en la variable time y se incrementa el dt en cada iteración. El módulo caja opera según este tiempo, en cada llamada se incrementa el tiempo para la caja también. Dentro de las responsabilidades del main también encontramos la responsabilidad de generar archivos cada cierto dt2. El tiempo en el main se acumula en la variable time y se incrementa el dt en cada iteración. El módulo caja opera según este tiempo, en cada llamada se incrementa el tiempo para la caja también. En la tabla podemos ver los archivos generados por el main si se tiene un dt de 0.1 segundos y se simula un segundo. En el caso que dt sea mucho  menor que el dt2, por ejemplo si dt = 0.00001 y dt2 = 0.5 entonces el único archivo de salida será 5.txt.
+Dentro de las responsabilidades del main también encontramos la responsabilidad de generar archivos cada cierto dt2. El tiempo en el main se acumula en la variable time y se incrementa el dt en cada iteración. El módulo caja opera según este tiempo, en cada llamada se incrementa el tiempo para la caja también. Dentro de las responsabilidades del main también encontramos la responsabilidad de generar archivos cada cierto dt2. El tiempo en el main se acumula en la variable time y se incrementa el dt en cada iteración. El módulo caja opera según este tiempo, en cada llamada se incrementa el tiempo para la caja también. En la tabla \ref{Implementación del Tiempo en el Main} podemos ver los archivos generados por el main si se tiene un dt de 0.1 segundos y se simula un segundo. En el caso que dt sea mucho  menor que el dt2, por ejemplo si dt = 0.00001 y dt2 = 0.5 entonces el único archivo de salida será 5.txt.
 
 \subsection{Problemas surgidos durante la integración}
 
@@ -168,12 +168,12 @@ Las simulaciones podemos dividirlas en tres grandes grupos. Por un lado se tiene
 \subsection{Simulaciones con el módulo de caja aislado}
 
 \paragraph{}
-Las simulaciones que se efectuaron con el simulador de cajas aislados se corrieron con 8 cajas, una separación entre ellas de 20 mts, una capacidad máxima de 8 personas, una distancia H de 8 y una distancia social de 2 mts.
+Las simulaciones que se efectuaron con el simulador de cajas aislados se corrieron con 8 cajas, una separación entre ellas de 20 mts, una capacidad máxima de 8 personas, una distancia H de 8 y una distancia social de 2 mts. Estos valores pueden verse mejor en la tabla \ref{Parametros del módulo geometria aislado}.
 
 \subsection{Simulaciones con el simulador integrado}
 
 \paragraph{}
-Una vez integrado el simulador en su totalidad, se corrieron simulaciones para poder llevar a cabo el estudio y análisis del problema de la distancia social dentro de un supermercado. Para estas simulaciones se generaron simulaciones con un número de agentes variables desde 8 hasta 89, incrementando de a 9 agentes. El tiempo total simulado fue de 7200 segundos y se utilizó el modelo operativo de CPM.
+Una vez integrado el simulador en su totalidad, se corrieron simulaciones para poder llevar a cabo el estudio y análisis del problema de la distancia social dentro de un supermercado. Para estas simulaciones se generaron simulaciones con un número de agentes variables desde 8 hasta 89, incrementando de a 9 agentes. El tiempo total simulado fue de 7200 segundos y se utilizó el modelo operativo de CPM.  Estos valores pueden verse mejor en la tabla \ref{Parámetros del simulador integrado}.
 
 \subsection{Mejoras en el código}
 
@@ -192,10 +192,13 @@ Tomando como referencia el commit con hash 8f372f51ab574babcb412e27433054dba8a93
 Los resultados discutidos en esta sección hacen referencia a las simulaciones realizadas para evaluar la mejora en el tiempo de ejecución.
 
 \paragraph{}
-Los resultados de las simulaciones antes de las mejoras se pueden ver en la tabla \ref{tablaAntes}.
+En un principio, antes de comenzar con las optimizaciones, se tomaron medidas a modo de control para ver el tiempo de ejecución y poder establecer comparabilidad entre las mediciones futuras una vez efectuadas las optimizaciones .Los resultados de las simulaciones antes de las mejoras se pueden ver en la tabla \ref{Tiempos de ejecución antes de las optimizaciones} y en el gráfico \ref{fig1}. Cabe destacar que estas mediciones del tiempo de ejecución (output) se hicieron 5 veces (en una misma máquina)  para cada número de agentes (input), luego se grafico el tiempo de ejecución promedio + - la desviación estándar.
 
 \paragraph{}
-Los resultados de las simulaciones después de las mejoras se pueden ver en la tabla \ref{tablaDespues}.
+Una vez implementadas las optimizaciones en el código fuente del simulador se volvieron a efectuar las mediciones. Los resultados de las simulaciones después de las mejoras se pueden ver en la tabla \ref{Tiempos de ejecución después de las optimizaciones} y en el gráfico \ref{fig2}.
+
+\paragraph{}
+El gráfico \ref {fig3} muestra como los tiempos de ejecución luego de efectuadas las optimizaciones se encuentra por debajo de las mediciones de control. Esto quiere decir que las optimizaciones disminuyeron el tiempo de ejecución.
 
 \section{Conclusiones}
 
@@ -215,11 +218,28 @@ texto
 \clearpage
 
 \section{Figuras}
+
 \begin{figure}[h]
 \begin{center}
-\includegraphics[width=4in]{./images/inputVsOutput.jpeg}
-\caption{Ejemplo aca va la descripcion }
-\label{grafico}
+\includegraphics[width=4in]{./images/Antes.png} 
+\caption{Tiempos de ejecución antes de las optimizaciones}
+\label{fig1}
+\end{center}
+\end{figure}
+
+\begin{figure}[h]
+\begin{center}
+\includegraphics[width=4in]{./images/Despues.png}
+\caption{Tiempos de ejecución después de las optimizaciones}
+\label{fig2}
+\end{center}
+\end{figure}
+
+\begin{figure}[h]
+\begin{center}
+\includegraphics[width=4in]{./images/AntesVSDespues.png}
+\caption{Tiempos de ejecución antes de las optimizaciones comparados contra después de las optimizaciones}
+\label{fig3}
 \end{center}
 \end{figure}
 
