@@ -27,13 +27,14 @@
 \centering
 {\includegraphics[width=1\textwidth]{./images/logoitba.png}\par}
 \vspace{1cm}
-{\scshape\Large Simulaci\'on de Sistemas \par}
+{\scshape\Large Simulación de Sistemas \par}
 \vspace{3cm}
-{\scshape\Huge COVID-19\par}
+{\scshape\Huge El problema de la distancia social en los supermercados \par}
 \vspace{3cm}
-{\itshape\Large Trabajo Pr\'actico Final \par}
+{\itshape\Large Trabajo Práctico Final \par}
 \vfill
 {\Large Autores: \par}
+{\Large Grupo 8\par}
 {\Large Tomás Bacigalupo, Lucio Pagni\par}
 \vfill
 {\Large \today \par}
@@ -51,43 +52,54 @@
 \section{Introducción}
 
 \paragraph{}
-Con el objetivo de estudiar el problema de distanciamiento social en el contexto de la pandemia mundial del covid-19 se trabajo durante la segunda mitad del cuatrimestre en un software de simulación de peatones comprando en un supermercado.Dicho software busca ser más poderoso y configurable que otras versiones comerciales, las cuales usamos como referencia. 
+Con el objetivo de estudiar el problema de distanciamiento social en el contexto de la pandemia mundial del covid-19 se trabajó durante la segunda mitad del cuatrimestre en un software de simulación de peatones comprando en un supermercado. Dicho software busca ser más poderoso y configurable que otras versiones comerciales, las cuales usamos como referencia.
 
 \paragraph{}
 Nuestro trabajo en el desarrollo fue el de estructurar el proyecto, implementar el main (del cual se desencadenan las llamadas a todos los demás módulos),  y desarrollar el modulo de la caja, cuya tarea es la  de atender clientes y encolarlos en la fila correcta.
 
 \paragraph{}
-Por otro lado el trabajo de estructura nos llevo a tomar decisiones como desarrollos de pom.xml con sus respectivas dependencias en cada modulo y como tarea principal se implementaron todos los módulos a travez de un main que permitía mediante un archivo de configuración establecer las variables de la simulación. Y es en este momento donde comienza nuestro trabajo de desarrollo para esta entrega final, donde se mejoraron los tiempos de simulación mediante la mejora de nuestros dos módulos: Main y Caja
+Por otro lado el trabajo de estructura nos llevo a tomar decisiones como desarrollos de pom.xml con sus respectivas dependencias en cada modulo y como tarea principal se implementaron todos los módulos a travez de un main que permitía mediante un archivo de configuración establecer las variables de la simulación. Y es en este momento donde comienza nuestro trabajo de desarrollo para esta entrega final, donde se mejoraron los tiempos de simulación mediante la optimización de nuestros dos módulos: Main y Caja.
+
+\section{Fundamentos}
 
 \subsection{Main}
 
 \paragraph{}
-La idea básica del main consiste en recorrer la lista de agentes y actualizarlos. Una vez que se actualizan todos, se actualiza la lista de agentes anterior por la nueva lista de agentes. Otra responsabilidad del main es guardar el estado del sistema, esto se hace
-cada cierto dt2 el cual es independiente del dt de simulación. Se guarda el id de los agentes y las variables de estado de todos los agentes. Por último el main también debe levantar un archivo de configuración.
+La idea básica del main consiste en recorrer la lista de agentes y actualizarlos. Una vez que se actualizan todos, se actualiza la lista de agentes anterior por la nueva lista de agentes.Por último el main también debe levantar un archivo de configuración.
+
+\subsubsection{Input}
+
+\paragraph{}
+
+Los inputs del main provienen de la lectura de un archivo de configuración en la cual se especifican todos los valores que son parametrizables en el main. En cuanto al main, los más relevantes son el tiempo total a simular, el numero de agentes, el dt  y el dt2.
+
+\subsubsection{Output}
+
+\paragraph{}
+El main debe guardar el estado del sistema, esto se hace cada cierto dt2, el cual es independiente del dt de simulación. Estos son archivos en los cuales se persisten información relevante de los agentes según el dt2. La información persistida en memoria mediante archivos contiene información como el id del agente, sus variables de estado (posición , velocidad) y el estado en el cual se encuentra. Esto permite un posterior procesamiento de los datos.
+
 
 \subsection{Módulo Fila}
 
 \paragraph{}
-El módulo de fila se descompone en N cajas las cuales tienen 2 cajeros cada una. Tiene una capacidad máxima max, una distancia social d y una distancia H a un punto p sub i el cual parametriza la posición de las cajas.
+El módulo de fila se descompone en N cajas las cuales tienen 2 cajeros cada una. Tiene una capacidad máxima max, una distancia social d y una distancia H a un punto pi el cual parametriza la posición de las cajas.
+
 \paragraph{}
-La parametrización geometrica se hizo lo mas general posible para poder adapatarnos a la hora de llamar al módulo de geometría y poder usar el retorno para asignar los parámetros de nuestra implementación.
+La parametrización geométrica se hizo lo mas general posible para poder adaptarnos a la hora de llamar al módulo de geometría y poder usar el retorno para asignar los parámetros de nuestra implementación.
+
 \paragraph{}
 El módulo provee una API pensada para la máquina de estados.
 
-\section{Fundamentos}
-
-\subsection{Input}
+\subsubsection{Input}
 
 \paragraph{}
-El módulo file obtiene sus inputs del módulo geometría. Obtiene de este módulo las posiciones de los lugares de pago.
+El módulo fila obtiene sus inputs del módulo geometría. Obtiene de este módulo las posiciones de los lugares de pago. A partir de estos valores calcula todas las posiciones asignadas durante la simulación.
 
-\subsection{Output}
+\subsubsection{Output}
+
 \paragraph{}
-El output del módulo fila se obtiene mediante su API , esto es, mediante su interfaz. Llamando a estos métodos se obtienen los estados internos de caja. El rol del módulo caja es representar mediante estructuras y algoritmos internos los estados y manejar
-según la lógica planteada, los agentes los cuales manipula.
-\paragraph{}
-En cuanto al módulo main, sus outputs son archivos en los cuales se persisten información relevante de los agentes segun el dt2. La información persistida en memoria mediante archivos contiene información como el id del agente, sus variables de estado 
-(posición , velocidad) y el estado en el cual se encuentra. Esto perminte un posterior procesamiento de los datos.
+El output del módulo fila se obtiene mediante su API , esto es, mediante su interfaz. Llamando a estos métodos se obtienen los estados internos de caja. El rol del módulo caja es representar mediante estructuras y algoritmos internos los estados y manejar según la lógica planteada, los agentes que manipula.
+
 
 \section{Implementación}
 
@@ -95,8 +107,9 @@ En cuanto al módulo main, sus outputs son archivos en los cuales se persisten i
 En esta sección discutiremos todos los aspectos que hacen a la implementación del simulador y la justificación de las decisiones tomadas, tanto de diseño de clases como de diseño de arquitectura.
 
 \subsection{Estructura, herramientas y frameworks}
+
 \paragraph{}
-El lenguaje de programación utilizado es Java , versión 8. Se utilizó JUnit como framework de testing, para tener cierto nivel de confianza y seguridad en el código implementado. Para estructurar los archivos del proyecto se utilizo la herramienta maven. Para visualizar durante la etapa de desarrollo se utilizo ovito y también un animador en python.
+El lenguaje de programación utilizado es Java , versión 8. Se utilizó JUnit como framework de testing, para tener cierto nivel de confianza y seguridad en el código implementado. Para estructurar los archivos del proyecto se utilizo la herramienta maven. Para visualizar durante la etapa de desarrollo se utilizo Ovito y también un animador en Python.
 
 \subsection{La estructura general del proyecto}
 
@@ -104,10 +117,10 @@ El lenguaje de programación utilizado es Java , versión 8. Se utilizó JUnit c
 En cuanto a la estructura, se optó por una implementación simple de Interfaces e Implementaciones, con el objetivo de programar contra interfaces como se puede ver en la figura \ref{grafico}. 
 
 \paragraph{}
-Incialmente la estructura propuesta consistía en una serie de módulos,interconectados y dependientes entre sí mediante una estructura jerárquica. Esta idea inicial no se llevó a cabo por problemas de dependencias cíclicas en esta estructura jerárquica. La estructura de la implementación es conveniente a la hora de definir los testeos unitarios de los métodos implementados y también lo es a la hora de definir archivos de configuración. 
+Incialmente la estructura propuesta consistía en una serie de módulos, interconectados y dependientes entre sí mediante una estructura jerárquica. Esta idea inicial no se llevó a cabo por problemas de dependencias cíclicas en esta estructura jerárquica. La estructura de la implementación es conveniente a la hora de definir los testeos unitarios de los métodos implementados y también lo es a la hora de definir archivos de configuración. 
 
 \paragraph{}
-En el momento de diagramar el main de la simulación, se hizo un uso intensivo de esta estructura y sus convenciones. Otra ventaja es que nos permite cumplir con los requerimientos impuestos con la cátedra de generar un archivo ejecutable .jar. Una de las bondades de la arquitectura de la implementación es que nos permite obtener dicho ejecutable realizando 'mvn clean package' en la terminal.
+En el momento de diagramar el main de la simulación, se hizo un uso intensivo de esta estructura y sus convenciones. Otra ventaja es que nos permite cumplir con los requerimientos de la cátedra de generar un archivo ejecutable .jar. Una de las bondades de la arquitectura de la implementación es que la herramienta para crearla (maven) nos permite obtener dicho ejecutable realizando 'mvn clean package' en la terminal.
 
 \subsection{La implementación del tiempo en el Main}
 
@@ -117,22 +130,22 @@ Dentro de las responsabilidades del main también encontramos la responsabilidad
 \subsection{Problemas surgidos durante la integración}
 
 \paragraph{}
-En un primer momento se resolvió el problema de la caja de manera aislada. Cuando se llevo a cabo la integración surgieron algunos inconvenientes los cuales pasamos a mencionar.
+En un primer momento se resolvió el problema de la caja de manera aislada. Cuando se llevó a cabo la integración surgieron algunos inconvenientes, los cuales pasamos a mencionar.
 
 \paragraph{}
 En un primer momento, se planteó el problema de las cajas como el problema de los productores y los consumidores. Esto implica que existe un while, bloqueante, que evita que el programa prosiga su ejecución mientras los demás agentes esta siendo atendidos. Esto sería equivalente a que cuando estamos en el supermercado y alguien esta pagando, tendríamos que quedarnos congelados hasta que se termina de atender. Este problema surge básicamente porque se pasa de un simulador aislado a un simulador integrado.
 
 \paragraph{}
-Debido a que el problema venía dado porque el método .run() de Caja Impl era estático (y porque para quien tiene un martillo todo problema es un clavo) optamos por hacer que el código bloqueante este en un thread aparte. Sin embargo cada thread estaba haciendo busy waiting y generando una cadena de texto que almacenaba valores. Esto consumía muchísimos recursos del computador (CPU y RAM).
+Debido a que el problema venía dado porque el método .run() de Caja Impl era estático (y porque para quien tiene un martillo todo problema es un clavo) optamos por hacer que el código bloqueante esté en un thread aparte. Sin embargo cada thread estaba haciendo busy waiting y generando una cadena de texto que almacenaba valores. Esto consumía muchísimos recursos del computador (CPU y RAM).
 
 \paragraph{}
 Para compensar el busy waiting utilizamos sleep. Esto podemos pensarlo como cuando un niño en la ruta le pregunta al padre cada 2 minutos cuanto falta para llegar al destino. La función sleep es el equivalente a que el niño se duerma y se despierte justo cuando se llega al destino.
 
 \paragraph{}
-Una vez hecho esto el consumo de recursos bajo drásticamente pero aún había un problema, los sleep requieren un tiempo en segundos como parámetro. Estó nos reveló una falla conceptual clave que teniamos respecto del tiempo de la simulación, el cual venía heredado del simulador aislado en el cual no teniamos una abstracción del tiempo de simulación aún.
+Una vez hecho esto, el consumo de recursos bajo drásticamente pero aún había un problema, los sleep requieren un tiempo en segundos como parámetro. Esto nos reveló una falla conceptual clave que teníamos respecto del tiempo de la simulación, el cual venía heredado del simulador aislado, en el cual no teníamos una abstracción del tiempo de simulación aún.
 
 \paragraph{}
-Finalmente, pensando el problema otra vez, nos dimos cuenta que la solución era mucho mas sencilla que todo lo que habíamos hecho. Se usó el while del main para preguntar en cada iteración el estado de las cajas. Además se usó el dt de main como cronómetro y no el tiempo del sistema. La lógica original se mantuvo intacta. Con estos cambios el método .run() solo debe hacer comparaciones, ya que el while del run pasa a ser el while del main. De esta manera se elimina el problema del busy waiting.
+Finalmente, pensando el problema otra vez, nos dimos cuenta que la solución era mucho más sencilla que todo lo que habíamos hecho. Se usó el while del main para preguntar en cada iteración el estado de las cajas. Además se usó el dt de main como cronómetro y no el tiempo del sistema. La lógica original se mantuvo intacta. Con estos cambios el método .run() solo debe hacer comparaciones, ya que él while del run pasa a ser el while del main. De esta manera se elimina el problema del busy waiting.
 
 \subsection{El problema de la configuración}
 
@@ -142,17 +155,17 @@ El simulador debe ser altamente configurable, para esto se implementó una clase
 \subsection{Programación contra interfaces}
 
 \paragraph{}
-Como se mencionó anteriormente, es importante poder programar contra interfaces.No solo es muy importante que cada módulo honre correctamente sus interfaces, sino que estas estén bien diseñadas de manera que se abarque el problema de manera completa. Además, se debe tener cuidado de no exponer estado interno de una clase de manera innecesaria. Veremos la justificación de diseño de la interfaz Caja
+Como se mencionó anteriormente, es importante poder programar contra interfaces. No solo es muy importante que cada módulo honre correctamente sus interfaces, sino que estas estén bien diseñadas de manera que se abarque el problema de manera completa. Además, se debe tener cuidado de no exponer estado interno de una clase de manera innecesaria. Veremos la justificación de diseño de la interfaz Caja.
 
 \paragraph{}
-Se expone estado interno de la caja innecesariamente? Por un lado, es verdad que lo mejor sería llamar a cajas.add(agent), o un método del estilo. Sin embargo esto no cubre la complejidad del problema a resolver, esto es porque se deben hacer varias consultas al estado interno de caja antes de insertar definitivamente un agente en la fila. La interfaz de la fila no solo debe darle varios datos a la máquina de estado sino que también debe otorgarlos en instantes distintos del tiempo. Es por eso que la fila provee información que indica a que caja ir y a que posición de cada caja debe ir. Este diseño le permite a la máquina de estados preguntar tantas veces como sea necesario. Además si retornamos unicamente una posición y no el indice de la caja, no estaríamos teniendo en cuanta si su lugar fue ocupado antes por otro agente. En definitiva, los datos expuestos son para que la máquina de estados tenga mas granularidad a la hora de elegir a donde ir y como llegar.
+Vale la pena entonces preguntarse si la caja expone estado interno innecesariamente. Por un lado, es verdad que lo mejor sería llamar a cajas.add(agent), o un método similar. Sin embargo esto no cubre la complejidad del problema a resolver, esto es porque se deben hacer varias consultas al estado interno de caja antes de insertar definitivamente un agente en la fila. La interfaz de la fila no solo debe darle varios datos a la máquina de estado sino que también debe otorgarlos en instantes distintos del tiempo. Es por eso que la fila provee información que indica a qué caja ir y a qué posición de cada caja debe ir. Este diseño le permite a la máquina de estados preguntar tantas veces como sea necesario. Además si retornamos únicamente una posición y no el indice de la caja, no estaríamos teniendo en cuanta si su lugar fue ocupado antes por otro agente. En definitiva, los datos expuestos son para que la máquina de estados tenga más granularidad a la hora de elegir a donde ir y como llegar.
 
 \section{Simulaciones}
-\paragraph{}
-Las simulaciones podemos dividirlas en tres grandes grupos. Por un lado se tienen las simulaciones iniciales, en las cuales el módulo caja es solo un boceto. En estas simulaciones se plantea el esquema básico del problema a resolver por el módulo de caja.
-Luego se tienen las simulaciones intermedias, estas son, todas las simulaciones que se llevaron a cabo con el simulador integrado. De estas últimas las más importantes son las entregadas para el TP6. Por último se tienen las simulaciones realizadas para evaluar la mejora en el tiempo de ejecución.
 
-\subsection{Simulaciones con el módulo de caja aisaldo}
+\paragraph{}
+Las simulaciones podemos dividirlas en tres grandes grupos. Por un lado se tienen las simulaciones iniciales, en las cuales el módulo caja es solo un boceto. En estas simulaciones se plantea el esquema básico del problema a resolver por el módulo de caja. Luego se tienen las simulaciones intermedias, estas son, todas las simulaciones que se llevaron a cabo con el simulador integrado. De estas últimas las más importantes son las entregadas para el TP6. Por último se tienen las simulaciones realizadas para evaluar la mejora en el tiempo de ejecución.
+
+\subsection{Simulaciones con el módulo de caja aislado}
 
 \paragraph{}
 Las simulaciones que se efectuaron con el simulador de cajas aislados se corrieron con 8 cajas, una separación entre ellas de 20 mts, una capacidad máxima de 8 personas, una distancia H de 8 y una distancia social de 2 mts.
@@ -160,38 +173,42 @@ Las simulaciones que se efectuaron con el simulador de cajas aislados se corrier
 \subsection{Simulaciones con el simulador integrado}
 
 \paragraph{}
-Una vez integrado el simulador en su totalidad, se corrieron simulaciones para poder llevar a cabo el estudio y análisis del problema de la distancia social dentro de un supermercado.
+Una vez integrado el simulador en su totalidad, se corrieron simulaciones para poder llevar a cabo el estudio y análisis del problema de la distancia social dentro de un supermercado. Para estas simulaciones se generaron simulaciones con un número de agentes variables desde 8 hasta 89, incrementando de a 9 agentes. El tiempo total simulado fue de 7200 segundos y se utilizó el modelo operativo de CPM.
 
 \subsection{Mejoras en el código}
 
 \paragraph{}
-De caras a la búsqueda de una mejora en el código, se buscó la dismunución en el tiempo de ejecución. Una manera de aproximarse a esta tarea es buscando en el código fuente del proyecto operaciones complejas, que requieren de muchos recursos de
-computación y que además son redundantes. Es decir, que no aportan valor al código escrito y que se pueden eliminar del código.
+De caras a la búsqueda de una mejora en el código, se buscó la disminución en el tiempo de ejecución. Una manera de aproximarse a esta tarea es buscando en el código fuente del proyecto operaciones complejas, que requieren de muchos recursos de computación y que además son redundantes. Es decir, que no aportan valor al código escrito y qué se pueden eliminar del código.
 
 \paragraph{}
-La primer mejora implementada elimina código que no aporta valor y que recorre todas las cajas de manera innecesaria. Esto implica que nos ahorramos comparaciones por cada dt2 del programa. En simulaciones largas con un dt2 cercano a dt esto implicaría realizar operaciones innecesarias que incrementan el tiempo de computo. Esta lógica estaba en el código para calcular la cantidad de agentes atendidos por las cajas, luego de volver a pensar la lógica de actualización se la cambió por una mucho mas sencilla, la cual además hace que esto funcione correctamente. La lógica del calculo de los atendidos fue algo que dejó de funcionar correctamente con la integración.
+La primer mejora implementada elimina código que no aporta valor y que recorre todas las cajas de manera innecesaria. Esto implica que nos ahorramos comparaciones por cada dt2 del programa. En simulaciones largas con un dt2 cercano a dt esto implicaría realizar operaciones innecesarias qué incrementan el tiempo de computo. Esta lógica estaba en el código para calcular la cantidad de agentes atendidos por las cajas, luego de volver a pensar la lógica de actualización se la cambió por una mucho mas sencilla, la cual además hace que esto funcione correctamente. La lógica del calculo de los atendidos fue algo que dejó de funcionar correctamente con la integración, pero que luego se arregló para que funcione correctamente.
 
 \paragraph{}
-Tomando como referencia el commit con hash 8f372f51ab574babcb412e27433054dba8a93cc3 del repositorio provisto por la cátedra, se midieron los tiempos de ejecución del programa variando la cantidad de agentes. Luego de una segunda serie de mejoras,
-se tomaron otras mediciones, dicha mejora esta en el commit con hash 6cc59e05024e9c3c4376ce6589377723940f1001 del repositorio provisto por la cátedra. Estas mejoras consistieron en la eliminación de la creación y recorrido de estructuras innecesarias, lo cual disminuyó el tiempo de ejecución.
+Tomando como referencia el commit con hash 8f372f51ab574babcb412e27433054dba8a93cc3 del repositorio provisto por la cátedra, se midieron los tiempos de ejecución del programa variando la cantidad de agentes. Luego de una segunda serie de mejoras, se tomaron otras mediciones, dicha mejora esta en el commit con hash 6cc59e05024e9c3c4376ce6589377723940f1001 del repositorio provisto por la cátedra. Estas mejoras consistieron en la eliminación de la creación y recorrido de estructuras innecesarias, lo cual disminuyó el tiempo de ejecución.
 
 \section{Resultados}
+
 \paragraph{}
 Los resultados discutidos en esta sección hacen referencia a las simulaciones realizadas para evaluar la mejora en el tiempo de ejecución.
+
+\paragraph{}
 Los resultados de las simulaciones antes de las mejoras se pueden ver en la tabla \ref{tablaAntes}.
-Los resultados de las simulaciones despue\'es de las mejoras se pueden ver en la tabla \ref{tablaDespues}.
+
+\paragraph{}
+Los resultados de las simulaciones después de las mejoras se pueden ver en la tabla \ref{tablaDespues}.
 
 \section{Conclusiones}
+
 \paragraph{}
-Observando los resultados podemos concluir que las mejoras realizadas en el código lograron el objetivo de disminuir el tiempo de ejecución. Atrevemos esta conclusión ya que si observamos el promedio de todas las corridas hechas antes de las mejoras y las
-comparamos contra los promedios de las corridas después de hechas las mismas observamos que para todo N el promedio de los tiempos de ejecución observamos que estos disminuyen una vez que se hicieron las mejoras.
+Observando los resultados podemos concluir que las mejoras realizadas en el código lograron el objetivo de disminuir el tiempo de ejecución. Atrevemos esta conclusión ya que si observamos el promedio de todas las corridas hechas antes de las mejoras y las comparamos contra los promedios de las corridas después de hechas las mismas observamos que para todo N, el promedio de los tiempos de ejecución disminuyen una vez realizadas las optimizaciones.
 
 \section{Agradecimientos}
+
 \paragraph{}
-No queremos terminar sin agradecer una vez más a los profesores por el voto de confianza que pusieron en los alumnos. También a nuestros compañeros por informarnos cada problema que surgió de la caja y por tenerlos la paciencia para
-ayudarnos con cada problema surgido durante la integración del simulador.
+No queremos terminar sin agradecer una vez más a los profesores por el voto de confianza que pusieron en los alumnos. También a nuestros compañeros por informarnos cada problema que surgió de la caja y por tenerlos la paciencia para ayudarnos con cada problema surgido durante la integración del simulador.
 
 \section{Apéndice}
+
 \paragraph{}
 texto
 
